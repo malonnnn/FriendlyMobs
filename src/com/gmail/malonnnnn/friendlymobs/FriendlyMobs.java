@@ -1,12 +1,10 @@
 package com.gmail.malonnnnn.friendlymobs;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-//import org.bukkit.World;
-import net.minecraft.server.v1_8_R3.World;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -40,21 +38,21 @@ public class FriendlyMobs extends JavaPlugin {
             int x = Integer.parseInt(args[1]);
             int y = Integer.parseInt(args[2]);
             int z = Integer.parseInt(args[3]);
-            World world = (World)getServer().getWorld(args[4]);
+            World world = getServer().getWorld(args[4]);
             String team = args[5];
             //sender.sendMessage(ChatColor.BLUE + "supersummon active");
             //Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "op malon");
             switch(args[0]) {
                 case "babyzombie":
                 case "zombie":
-                    Utils.EntityTypes.spawnEntity(entityType, new CustomZombie(world), new Location(world, x, y, z), world, team);
+                    Utils.EntityTypes.spawnEntity(entityType, new CustomZombie(((CraftWorld)world).getHandle()), new Location(world, x, y, z), world, team);
                     break;
                 case "skeleton":
-                    Utils.EntityTypes.spawnEntity(entityType, new CustomSkeleton(world), new Location(world, x, y, z), world, team);
+                    Utils.EntityTypes.spawnEntity(entityType, new CustomSkeleton(((CraftWorld)world).getHandle()), new Location(world, x, y, z), world, team);
                     break;
                 case "babypigzombie":
                 case "pigzombie":
-                    Utils.EntityTypes.spawnEntity(entityType, new CustomPigZombie(world), new Location(world, x, y, z), world, team);
+                    Utils.EntityTypes.spawnEntity(entityType, new CustomPigZombie(((CraftWorld)world).getHandle()), new Location(world, x, y, z), world, team);
                     break;
                 default:
                     return false;
